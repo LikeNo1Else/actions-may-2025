@@ -2,29 +2,27 @@ name: Terraform
 on:
   workflow_dispatch:
 
-jobs: 
+jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
     - name: Git Clone
       uses: actions/checkout@v4
 
-    - name: setup Terraform
+    - name: Setup Terraform
       uses: hashicorp/setup-terraform@v3
       with:
         terraform_version: "1.12.2"
 
-
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v4.3.1
       with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-access-key-id: "${{ secrets.AWS_ACCESS_KEY_ID }}"
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-east-1
-    
-    - name: Init 
+        aws-region: us-east-2
+
+    - name: Init
       run: terraform init
-        
+
     - name: Apply
       run: terraform apply -auto-approve
-
