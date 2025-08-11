@@ -25,4 +25,4 @@ jobs:
       run: terraform init
 
     - name: Apply or Destroy
-      run: terraform apply -auto-approve
+      run: terraform destroy -auto-approve
