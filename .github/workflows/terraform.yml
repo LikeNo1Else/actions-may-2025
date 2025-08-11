@@ -21,6 +21,8 @@ jobs:
       uses: hashicorp/setup-terraform@v3
       with:
         terraform_version: "1.12.2"
+    - name: Init
+      run: terraform init
 
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v4.3.1
@@ -29,8 +31,5 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-2
 
-    - name: Init
-      run: terraform init
-
     - name: Apply or Destroy
-      run:
+      run: terraform apply -auto-approve
